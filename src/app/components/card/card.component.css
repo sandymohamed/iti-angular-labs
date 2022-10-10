@@ -1,0 +1,24 @@
+/* .p-card{
+    width:30%
+} */
+
+.card-container{
+    margin: 2rem;
+}
+.select-box{
+    margin-bottom: 1.2rem;
+}
+/* .p-card{
+    height: 70vh;
+} */
+.img{
+    height: 40vh;
+}
+
+.price{
+    font-size: 2rem;
+}
+
+input{
+    width: 20%;
+}

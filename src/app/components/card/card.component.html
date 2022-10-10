@@ -1,0 +1,51 @@
+ <!-- <div>
+      <select class="form-select select-box" aria-label="Default select example" #cat (change)="onSelect(cat.value)">    
+        <option *ngFor="let cat of productCategory" [value]="cat.id" >{{cat.name}}</option>
+    </select>
+    </div> -->
+
+
+<div class="card-container"> 
+
+<div class="row row-cols-1 row-cols-md-2 g-4 card-div">
+  <!-- <div class="col-4 " [class.d-none]="selectedCatId != item.categoryID"  *ngFor="let item of productsList" [ngStyle]="{'background-color': mycolor}" [ngClass]="{'d-none': item.quantity == 0}" > -->
+   
+    <div class="col-4 " *ngFor="let item of filtering" [ngClass]="{'d-none': item.quantity == 0}" >
+     
+      <div class="card p-card p-1 shadow p-3 mb-5 rounded" [ngClass]="{'bg-warning': item.quantity == 1}">
+        <div [ngSwitch]="item.categoryID">
+          <!-- <div *ngSwitchCase="1"></div> -->
+          <h6><span class="badge bg-secondary"  *ngSwitchCase="1">labtoop</span></h6>
+          <h6><span class="badge bg-secondary"  *ngSwitchCase="2">ipad</span></h6>
+          <h6><span class="badge bg-secondary"  *ngSwitchCase="3">phone</span></h6>
+
+        </div>
+        <img [src]="item.imgURL" class="img">
+        <div class="card-body">
+          <h3 class="card-title">{{item.name}} </h3>
+          <p class="card-text ">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi rem fuga aspernatur nesciunt sit quos voluptatibus optio atque.</p>
+        <div class="d-flex w-100 position-relative">      
+          <p class="card-text price">{{item.price}} <sup class=" text-primary">$</sup></p>
+          <div class="form d-flex position-absolute bottom-0 end-0 mb-2">
+            <label for="qty" class="form-label m-1 mb-3 fs-4">quntity</label>
+            <input #qty value="0" type="number" min="0" [max]="item.quantity" class="form-control m-1 w-50" id="qty">      
+          </div>
+          </div>
+          <!-- <button class="btn btn-primary m-1 w-100" (click)="addToCart(item.price,qty.value, item.id , item)"> Add To Cart </button> -->
+          <button class="btn btn-primary m-1 w-100" (click)="onSelect(item)"> Add To Cart </button>
+
+          <button class="btn btn-primary m-1 w-100" (click)="getProductTotalPrice(item.price,qty.value, item.id)"> buy </button>
+          <button class="btn btn-primary m-1 w-100" [routerLink]="['/products/',item.id]" routerLinkActive="router-link-active"  > details </button>
+
+        </div>
+          <div [ngSwitch]="item.quantity ">
+            <div *ngSwitchCase="1">Last Item</div>
+            <div *ngSwitchDefault>Available</div>
+          </div>
+          <hr> 
+           <p class="card-text ">total price: {{getProductTotalPrice(item.price,qty.value, item.id)}}  <sup class=" text-primary">$</sup></p>
+        </div> 
+    </div>
+    
+  </div>
+</div>

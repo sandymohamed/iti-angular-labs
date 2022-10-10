@@ -1,0 +1,19 @@
+<!-- {{product | json}} -->
+
+<div class="card" style="width: 18rem;">
+    <img [src]="product.imgURL" class="card-img-top" alt="product">
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <div class="card-text">
+        <div>price: {{product.price}}</div>
+        <div>quantity: {{product.quantity}}</div>
+
+      </div>
+
+      <div class="btn-group text-center m-4" role="group" aria-label="Basic mixed styles example">
+        <button type="button" [disabled]="currentProdId==productsId[0]" class="btn btn-danger" (click)="previousProd()">Left</button>
+        <button type="button" class="btn btn-warning"  (click)="goBack()"> Back </button>
+        <button type="button"  [disabled]="currentProdId==productsId[productsId.length - 1]" class="btn btn-success" (click)="nextProd()">Right</button>
+      </div>
+    </div>
+  </div>

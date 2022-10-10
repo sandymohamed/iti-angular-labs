@@ -1,0 +1,11 @@
+<div >
+    <img class="w-100" src="https://img.freepik.com/free-vector/local-business-marketing-banner-template_107791-2219.jpg?size=626&ext=jpg&ga=GA1.2.1264324647.1660309253">
+    <a class="btn btn-primary w-50 m-4" [routerLink]="['/products']" > Products</a> 
+   
+       <button class="nav-link btn btn-primary m-4 d-block text-warning" [disabled]="isUserLogged" (click)="userLogin()">Login</button>  
+       <button class="nav-link btn btn-warning m-4" [disabled]="!isUserLogged" (click)="userLogout()">Logout</button>
+     
+    
+    <!-- <app-select-box></app-select-box>
+    <app-cart></app-cart> -->
+</div>  

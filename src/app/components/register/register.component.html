@@ -1,0 +1,127 @@
+<form class="form p-3 " [formGroup]="registerForm">
+    <div class="mb3">
+        <label for="first-name" class="form-label">Full Name: </label>
+        <input id="first-name" formControlName="fullName" class="form-control" type="text">
+
+        <div class="alert alert-warning" *ngIf="Form['fullName'].touched  && Form['fullName'].invalid ">
+            <small *ngIf="Form['fullName']?.errors?.['required']"> name is required</small>
+            <small *ngIf="Form['fullName']?.errors?.['pattern']"> name must be atleast 5 letters</small>
+        </div>
+
+    </div>
+
+    <div class="mb3">
+        <label for="email" class="form-label">Email: </label>
+        <input id="email" formControlName="email" class="form-control" type="email">
+        <div class="alert alert-warning" [hidden]="userEmail?.valid || userEmail?.untouched">
+            <small *ngIf="userEmail?.errors?.['existEmail']">this email is exist</small>
+            <!-- <small *ngIf="userEmail?.errors?.['existEmail']"> email not valid , {{userEmail?.errors?.['emailNotValid'].value}}</small> -->
+        </div>
+
+    </div>
+
+    <div class="mb3">
+        <div *ngFor="let phone of phoneNumbers.controls; let i=index">
+
+            <label for="{{'uphone-' + i}}" class="form-label">Phone #{{i +1}} </label>
+            <input id="{{'uphone-' + i}}" [formControlName]="i" class="form-control" type="tel"
+                name="{{'uphone-' + i}}">
+            <button class="btn btn-primary" (click)="addPhone($event)"> + </button>
+        </div>
+    </div>
+
+    <div formGroupName="address">
+
+        <div class="mb3">
+            <label for="city" class="form-label">city: </label>
+            <input id="city" formControlName="city" class="form-control" type="text">
+        </div>
+
+        <div class="mb3">
+            <label for="postalCode" class="form-label">postal Code: </label>
+            <input id="postalCode" formControlName="postalCode" class="form-control" type="text">
+        </div>
+
+        <div class="mb3">
+            <label for="street" class="form-label">street: </label>
+            <input id="street" formControlName="street" class="form-control" type="text">
+        </div>
+
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="referral" name="referral" id="exampleRadios1"
+            value="socialMedia" (change)="updateReferralValid()">
+        <label class="form-check-label" for="exampleRadios1">
+            social media
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="referral" name="referral" id="exampleRadios2"
+            value="friends" (change)="updateReferralValid()">
+        <label class="form-check-label" for="exampleRadios2">
+            friends
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="referral" name="referral" id="exampleRadios3"
+            value="other" (change)="updateReferralValid()">
+        <label class="form-check-label" for="exampleRadios3">
+            other
+        </label>
+    </div>
+    <!-- to check if select other then apper and required field -->
+    <div class="mb-3" *ngIf="referral?.value=='other'">
+        <label for="rother" class="form-label">specify: </label>
+        <input id="rother" formControlName="referralOther" name="referralOther" class="form-control" type="text">
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">password: </label>
+        <input id="password" formControlName="password" class="form-control" type="password">
+        <!-- <div  class="alert alert-warning" *ngIf="password?.errors?.['required']"> password req</div> -->
+        <div class="alert alert-warning" *ngIf="Form['password'].touched">
+            <small *ngIf="Form['password']?.errors?.['required']"> password is required</small>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="confirmPassword" class="form-label">confirm Password: </label>
+        <input id="confirmPassword" formControlName="confirmPassword" class="form-control" type="password">
+       
+       
+        <!-- <div class="alert alert-warning" *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.touched">
+            <small *ngIf="confirmPass?.errors?.['required']">pass is required</small>
+            <small *ngIf="registerForm?.errors?.['passwordDosntMatch']"> pass not valid </small>
+
+            password is required
+        </div> 
+        <div small class="alert alert-warning" *ngIf="registerForm?.errors?.['unmatchedPassword']"> confirmPassword must match password
+</div> -->
+
+<div class="alert alert-warning" *ngIf="Form['confirmPassword'].touched">
+    <small *ngIf="confirmPassword?.errors?.['required']"> confirmPassword is required</small>
+    <!-- <small *ngIf="Form['confirmPassword']?.errors?.['unmatchedPassword'] "> confirmPassword must match password</small> -->
+</div>
+
+    </div>
+    <button class="btn btn-primary" type="submit" (click)="submit()">submit</button>
+</form>
+
+<!-- 
+<hr>
+<div class="text-secondary ">
+    <h1>test: </h1>
+    <div>
+        pass: {{registerForm.errors?.['unmatchedPassword'] | json}}
+    </div> 
+    <div>
+        ref: {{registerForm.get('referralOther')?.errors |json}}
+    </div>
+    <div>
+        {{registerForm.value | json}}
+    </div>
+    <div>
+        {{userFullName?.errors |json}}
+    </div>
+
+</div> -->
